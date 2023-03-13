@@ -1,5 +1,6 @@
 import {
 	ChatInputCommandInteraction,
+	CommandInteraction,
 	ContextMenuCommandBuilder,
 	ContextMenuCommandInteraction,
 	SlashCommandBuilder,
@@ -7,16 +8,21 @@ import {
 } from 'discord.js'
 import { ExtendedClient } from './Client'
 
-export type CommandData =
-	| SlashCommandBuilder
-	| SlashCommandSubcommandsOnlyBuilder
-	| Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>
-	| ContextMenuCommandBuilder
-export type CommandExecute = (
-	interaction: ContextMenuCommandInteraction | ChatInputCommandInteraction,
+// export type CommandData<T> =
+// 	| SlashCommandBuilder
+// 	| SlashCommandSubcommandsOnlyBuilder
+// 	| Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>
+// 	| ContextMenuCommandBuilder
+export type CommandExecute<T extends CommandInteraction> = (
+	interaction: T,
 	client: ExtendedClient
 ) => any
+// export type CommandExecute<T extends CommandInteraction> = (
+// 	interaction: ContextMenuCommandInteraction | ChatInputCommandInteraction,
+// 	client: ExtendedClient
+// ) => any
 
-export class Command {
-	constructor(public data: CommandData, public execute: CommandExecute) {}
+export abstract class Command {
+	public abstract data: any
+	public abstract execute: CommandExecute<any>
 }

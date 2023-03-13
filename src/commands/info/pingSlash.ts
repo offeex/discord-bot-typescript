@@ -1,14 +1,9 @@
-import { Command } from '../../structures/Command'
-import {
-	ButtonStyle,
-	ComponentType,
-	SlashCommandBuilder,
-	TextInputStyle,
-} from 'discord.js'
+import {SlashCommandBuilder} from 'discord.js'
+import {SlashCommand} from '../../structures/command/SlashCommand'
 
-export default new Command(
-	new SlashCommandBuilder().setName('ping-slash').setDescription('Pong!'),
-	async interaction => {
-		await interaction.reply('Pong!')
-	}
+export default new SlashCommand(
+    new SlashCommandBuilder().setName('ping-slash').setDescription('Pong!'),
+    async interaction => {
+        await interaction.reply('Pong!')
+    }
 )

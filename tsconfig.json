@@ -14,8 +14,9 @@
     "skipDefaultLibCheck": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "typeRoots": ["node_modules/@types", "src/types"],
+    "typeRoots": ["node_modules/@types"],
+    "strict": true,
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

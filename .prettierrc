@@ -5,7 +5,7 @@
   "useTabs": true,
   "embeddedLanguageFormatting": "auto",
   "jsxSingleQuote": true,
-  "printWidth": 86,
+  "printWidth": 80,
   "quoteProps": "consistent",
   "endOfLine": "lf",
   "semi": false,

@@ -6,8 +6,9 @@ import {
 	ContextMenuCommandBuilder,
 	TextInputStyle,
 } from 'discord.js'
+import { ContextMenuCommand } from '../../structures/command/ContextMenuCommand'
 
-export default new Command(
+export default new ContextMenuCommand(
 	new ContextMenuCommandBuilder()
 		.setName('ping-context-menu')
 		.setType(ApplicationCommandType.Message),
