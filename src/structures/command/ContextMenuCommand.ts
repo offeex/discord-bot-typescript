@@ -1,6 +1,5 @@
-import {ChatInputCommandInteraction, ContextMenuCommandBuilder,
-    ContextMenuCommandInteraction, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder} from "discord.js";
-import {Command, CommandExecute} from "../Command";
+import { ContextMenuCommandBuilder, ContextMenuCommandInteraction } from 'discord.js'
+import { Command, CommandExecute } from '../Command'
 
 export class ContextMenuCommand extends Command {
     constructor(

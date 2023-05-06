@@ -1,35 +1,25 @@
-import { Client, ClientEvents, Collection } from 'discord.js'
-import { globSync } from 'glob'
-import { Event } from './Event'
-import { Command } from './Command'
+import {Client, Collection, Guild} from 'discord.js'
+import {Command} from './Command'
+import Button from "./Button";
+import Modal from "./Modal";
+import {load} from "../utils/load.util";
 
 export class ExtendedClient extends Client {
-    public readonly commands: Collection<string, Command> = new Collection()
+  public readonly commands: Collection<string, Command> = new Collection()
+  public readonly buttons: Collection<string, Button> = new Collection()
+  public readonly modals: Collection<string, Modal> = new Collection()
+  public guild: Guild | undefined
 
-    constructor() {
-        super({ intents: ['Guilds', 'GuildMessages'] })
-    }
+  constructor() {
+    super({intents: ['Guilds', 'GuildMessages', 'MessageContent']})
+  }
 
-    public async start() {
-        this.loadEvents()
-        this.loadCommands()
-        this.login(process.env.TOKEN).then(() => console.log('Logged in!'))
-    }
+  public async start() {
+    load(this)
+    this.login(process.env.TOKEN).then(() => console.log('Logged in!'))
 
-    private loadEvents() {
-        const files = globSync(`${__dirname}/../events/*.ts`)
-        for (const path of files) {
-            const { event, execute }: Event<keyof ClientEvents> = require(path).default
-            this.on(event, execute)
-        }
-    }
+    this.guild = await this.guilds.fetch(process.env.GUILD_ID!)
+    if (!this.guild) throw new Error('Guild not found')
 
-    private loadCommands() {
-        const files = globSync(`${__dirname}/../commands/*/*.ts`)
-        for (const path of files) {
-            const command: Command = (require(path)).default
-            if (!command) continue
-            this.commands.set(command.data.name, command)
-        }
-    }
+  }
 }

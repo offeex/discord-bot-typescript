@@ -1,10 +1,6 @@
-import { config } from 'dotenv'
-import {
-	ApplicationCommandType,
-	ContextMenuCommandBuilder,
-	GatewayIntentBits,
-} from 'discord.js'
-import { ExtendedClient } from './structures/Client'
+import {config} from 'dotenv'
+import {ApplicationCommandType, GatewayIntentBits,} from 'discord.js'
+import {ExtendedClient} from './structures/Client'
 
 config()
 
